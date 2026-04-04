@@ -6,9 +6,6 @@ O **ViverBem** é uma aplicação mobile multiplataforma projetada para promover
 
 <img width="184" height="383" alt="image" src="https://github.com/user-attachments/assets/9e2005b6-942b-42a0-b2e9-10c72156908f" /> <img width="186" height="390" alt="image" src="https://github.com/user-attachments/assets/6a74a630-85d3-453e-be1a-1700e0712d03" /> <img width="188" height="393" alt="image" src="https://github.com/user-attachments/assets/6430e176-ab7f-4c80-b5e3-898ef570b6fd" /> <img width="184" height="389" alt="image" src="https://github.com/user-attachments/assets/d516b75a-3ee9-4632-8a25-c2571ee4e27a" />
 
-
-
-
 ---
 
 ## ✨ Funcionalidades Principais (MVP)
@@ -20,6 +17,20 @@ O **ViverBem** é uma aplicação mobile multiplataforma projetada para promover
 - 🆘 **Rede de Apoio (RF12):** Notificações para contatos de emergência caso doses não sejam confirmadas em 24h.
 
 ---
+
+## 📋 Organização do Projeto
+
+O planejamento e acompanhamento das tarefas foram gerenciados no **Trello**, utilizando o método **Kanban** para controle visual do fluxo de desenvolvimento.
+
+<img width="1880" height="740" alt="image" src="https://github.com/user-attachments/assets/99573e79-11c2-4965-9c64-aa22f0ba8657" />
+
+### Práticas Adotadas
+
+- **Cards por funcionalidade** — cada requisito (RF/RN) foi mapeado em um card específico.
+- **Etiquetas por categoria** — Frontend, IA, Documentação, Acessibilidade e Testes.
+- **Checklists internos** — subtarefas dentro de cada card para rastreamento granular do progresso.
+- **Responsáveis definidos** — cada card foi atribuído a um ou mais membros da equipe.
+- **Datas de entrega** — prazos configurados por card para alinhamento com as entregas acadêmicas.
 
 ## 🛠️ Stack Tecnológica
 

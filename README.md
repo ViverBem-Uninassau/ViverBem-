@@ -4,7 +4,9 @@
 
 O **ViverBem** é uma aplicação mobile multiplataforma projetada para promover a autonomia de idosos (60+) no gerenciamento de tratamentos medicamentosos. O sistema utiliza **Inteligência Artificial** para transformar a câmera do smartphone em uma ferramenta de segurança, identificando fármacos e automatizando alertas.
 
-<img width="162" height="347" alt="image" src="https://github.com/user-attachments/assets/bd00bcc1-1bcf-404c-8c82-d7d1a7c5a232" /> <img width="186" height="390" alt="image" src="https://github.com/user-attachments/assets/6a74a630-85d3-453e-be1a-1700e0712d03" />
+<img width="184" height="383" alt="image" src="https://github.com/user-attachments/assets/9e2005b6-942b-42a0-b2e9-10c72156908f" /> <img width="186" height="390" alt="image" src="https://github.com/user-attachments/assets/6a74a630-85d3-453e-be1a-1700e0712d03" /> <img width="188" height="393" alt="image" src="https://github.com/user-attachments/assets/6430e176-ab7f-4c80-b5e3-898ef570b6fd" /> <img width="184" height="389" alt="image" src="https://github.com/user-attachments/assets/d516b75a-3ee9-4632-8a25-c2571ee4e27a" />
+
+
 
 
 ---

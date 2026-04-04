@@ -28,9 +28,6 @@ O **ViverBem** é uma aplicação mobile multiplataforma projetada para promover
 
 ---
 
-
----
-
 ## 🚀 Como Executar
 
 **Requisitos:** Node.js instalado.

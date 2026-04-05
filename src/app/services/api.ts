@@ -1,5 +1,8 @@
 // src/app/services/api.ts
 
+const NODE_API = import.meta.env.VITE_NODE_API_URL ?? '/api';
+const PYTHON_API = import.meta.env.VITE_PYTHON_API_URL ?? '/python';
+
 function getDeviceId(): string {
   let id = localStorage.getItem('device_id');
   if (!id) {
@@ -54,40 +57,40 @@ export interface Medicamento {
 
 export const alarmes = {
   listar: () =>
-    request<Alarme[]>(`/api/alarms/${getDeviceId()}`),
+    request<Alarme[]>(`${NODE_API}/alarms/${getDeviceId()}`),
 
   criar: (dados: { medication: string; time: string; frequency: string; dosage?: string }) =>
-    request<{ id: string }>('/api/alarms', {
+    request<{ id: string }>(`${NODE_API}/alarms`, {
       method: 'POST',
       body: JSON.stringify({ ...dados, fcm_token: 'web-token' }),
     }),
 
   atualizar: (id: string, dados: Partial<Alarme>) =>
-    request<{ message: string }>(`/api/alarms/${id}`, {
+    request<{ message: string }>(`${NODE_API}/alarms/${id}`, {
       method: 'PUT',
       body: JSON.stringify(dados),
     }),
 
   remover: (id: string) =>
-    request<{ message: string }>(`/api/alarms/${id}`, { method: 'DELETE' }),
+    request<{ message: string }>(`${NODE_API}/alarms/${id}`, { method: 'DELETE' }),
 };
 
 // --- Doses ---
 
 export const doses = {
   confirmar: (alarm_id: string, medication: string) =>
-    request<{ id: string }>('/api/doses/confirm', {
+    request<{ id: string }>(`${NODE_API}/doses/confirm`, {
       method: 'POST',
       body: JSON.stringify({ alarm_id, medication }),
     }),
 
   historico: () =>
-    request<Dose[]>(`/api/history/${getDeviceId()}`),
+    request<Dose[]>(`${NODE_API}/history/${getDeviceId()}`),
 };
 
 // --- Medicamentos (Python API) ---
 
 export const medicamentos = {
   buscar: (name: string) =>
-    request<Medicamento>(`/python/medications?name=${encodeURIComponent(name)}`),
+    request<Medicamento>(`${PYTHON_API}/medications?name=${encodeURIComponent(name)}`),
 };

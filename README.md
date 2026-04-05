@@ -1,4 +1,4 @@
-# 🏥 ViverBem (MedCare) - Frontend Mobile
+# 🏥 ViverBem - Frontend Mobile
 
 > Interface inteligente para identificação e gestão de medicamentos voltada à terceira idade.
 

@@ -5,11 +5,12 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 // Device ID — identificador único do dispositivo (UUID v4 gerado uma vez)
 // ---------------------------------------------------------------------------
 export function getDeviceId(): string {
-  let id = localStorage.getItem('vb_device_id');
+  // Mantém compatibilidade com a chave antiga ('device_id') usada antes desta versão
+  let id = localStorage.getItem('device_id') || localStorage.getItem('vb_device_id');
   if (!id) {
     id = crypto.randomUUID();
-    localStorage.setItem('vb_device_id', id);
   }
+  localStorage.setItem('device_id', id);
   return id;
 }
 

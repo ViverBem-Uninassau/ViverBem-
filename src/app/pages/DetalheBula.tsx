@@ -1,21 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { Play, Pause, ArrowLeft, Volume2 } from "lucide-react";
+import { type Medicamento } from "../services/api";
 
-type Medication = {
-  id: string;
-  name: string;
-  active_ingredient: string;
-  dosage: string;
-  indications: string[];
-  contraindications: string[];
-  disclaimer: string;
-};
-
-// ---------------------------------------------------------------------------
-// Formata os dados do medicamento em texto corrido para o TTS ler
-// ---------------------------------------------------------------------------
-function buildSpeechText(med: Medication): string {
+function buildSpeechText(med: Medicamento): string {
   const indications = med.indications.length
     ? `Indicações: ${med.indications.join(", ")}.`
     : "";
@@ -41,17 +29,14 @@ export function DetalheBula() {
   const [reproduzindo, setReproduzindo] = useState(false);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
-  // Dados do medicamento passados via router state pela HistoricoBulas ou Home
-  const medication: Medication | undefined = location.state?.medication;
+  const medication: Medicamento | undefined = location.state?.medication;
 
-  // Cancela TTS ao sair da tela
   useEffect(() => {
     return () => {
       window.speechSynthesis.cancel();
     };
   }, []);
 
-  // Redireciona se chegou sem dados (ex: refresh direto na URL)
   if (!medication) {
     return (
       <div className="size-full flex flex-col items-center justify-center gap-4 bg-blue-50 px-6">
@@ -131,7 +116,6 @@ export function DetalheBula() {
               </div>
             )}
 
-            {/* Nome e dosagem */}
             <div>
               <h2 className="text-xl font-bold text-gray-800">{medication.name}</h2>
               {medication.dosage && (
@@ -139,7 +123,6 @@ export function DetalheBula() {
               )}
             </div>
 
-            {/* Princípio ativo */}
             {medication.active_ingredient && (
               <div>
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">
@@ -149,7 +132,6 @@ export function DetalheBula() {
               </div>
             )}
 
-            {/* Indicações */}
             {medication.indications.length > 0 && (
               <div>
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
@@ -166,7 +148,6 @@ export function DetalheBula() {
               </div>
             )}
 
-            {/* Contraindicações */}
             {medication.contraindications.length > 0 && (
               <div>
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
@@ -183,7 +164,6 @@ export function DetalheBula() {
               </div>
             )}
 
-            {/* Disclaimer */}
             {medication.disclaimer && (
               <div className="p-4 bg-yellow-50 rounded-xl border border-yellow-200">
                 <p className="text-sm text-yellow-800 leading-relaxed">

@@ -1,22 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { FileText, ChevronRight, Loader2, Camera } from "lucide-react";
-import { getMedicationHistory } from "../services/api";
-
-type Medication = {
-  id: string;
-  name: string;
-  active_ingredient: string;
-  dosage: string;
-  indications: string[];
-  contraindications: string[];
-  disclaimer: string;
-  source: "scan" | "chat";
-};
+import { getMedicationHistory, type Medicamento } from "../services/api";
 
 export function HistoricoBulas() {
   const navigate = useNavigate();
-  const [medications, setMedications] = useState<Medication[]>([]);
+  const [medications, setMedications] = useState<Medicamento[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -53,7 +42,6 @@ export function HistoricoBulas() {
           )}
 
           {!loading && !error && medications.length === 0 && (
-            /* Estado vazio — orienta o usuário a usar a câmera ou voz */
             <div className="flex flex-col items-center justify-center h-48 gap-4 text-center">
               <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
                 <Camera size={32} className="text-blue-400" />

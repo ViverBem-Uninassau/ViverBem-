@@ -14,6 +14,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: "bulas", Component: HistoricoBulas },
+      { path: "bulas/resultado", Component: DetalheBula },
       { path: "bulas/:id", Component: DetalheBula },
       { path: "alarmes", Component: HistoricoAlarmes },
       { path: "alarmes/novo", Component: NovoAlarme },

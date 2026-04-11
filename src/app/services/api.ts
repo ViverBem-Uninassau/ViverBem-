@@ -108,10 +108,19 @@ export const alarmes = {
   listar: () =>
     request<Alarme[]>(`${API_URL}/alarms/${getDeviceId()}`),
 
-  criar: (dados: { medication: string; time: string; frequency: string; dosage?: string }) =>
+  criar: (dados: {
+    medication: string;
+    time: string;
+    frequency: string;
+    dosage_value: string;  
+    dosage_unit: string;    
+  }) =>
     request<{ id: string }>(`${API_URL}/alarms`, {
       method: 'POST',
-      body: JSON.stringify({ ...dados, fcm_token: 'web-token' }),
+      body: JSON.stringify({
+        ...dados,
+        fcm_token: 'web-token',
+      }),
     }),
 
   atualizar: (id: string, dados: Partial<Alarme>) =>
@@ -121,9 +130,10 @@ export const alarmes = {
     }),
 
   remover: (id: string) =>
-    request<{ message: string }>(`${API_URL}/alarms/${id}`, { method: 'DELETE' }),
+    request<{ message: string }>(`${API_URL}/alarms/${id}`, {
+      method: 'DELETE',
+    }),
 };
-
 // ---------------------------------------------------------------------------
 // Doses
 // ---------------------------------------------------------------------------

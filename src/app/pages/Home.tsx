@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { Camera, Mic, Loader2 } from "lucide-react";
 import { scanMedication, sendChat } from "../services/api";
+import logo from "../../assets/logo.jpg";
 
 // ---------------------------------------------------------------------------
 // Utilitário de voz (TTS)
@@ -132,17 +133,18 @@ export function Home() {
         onChange={handleImageCapture}
       />
 
-      {/* TOPO (50%) */}
-      <div className="h-1/2 bg-gradient-to-br from-blue-400 via-blue-300 to-blue-200 flex flex-col items-center justify-center gap-4 px-6">
+      {/* TOPO (40%) */}
+      <div className="h-[40%] bg-gradient-to-br from-blue-400 via-blue-300 to-blue-200 flex flex-col items-center justify-center gap-4 px-6">
         <div className="w-28 h-28 bg-blue-200/40 rounded-3xl flex items-center justify-center backdrop-blur-sm">
-          <svg width="70" height="70" viewBox="0 0 80 80" fill="none">
-            <rect x="30" y="10" width="20" height="60" rx="4" fill="white" />
-            <rect x="10" y="30" width="60" height="20" rx="4" fill="white" />
-          </svg>
+           <img 
+                src={logo}
+                alt="Logo ViverBem"
+                className="w-24 h-24 object-cover rounded-full border-4 border-white shadow-lg"
+      />
         </div>
 
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-white">MedCare</h1>
+          <h1 className="text-3xl font-bold text-white">ViverBem</h1>
           <p className="text-sm text-white/90">Seu assistente de medicamentos</p>
         </div>
       </div>
@@ -165,7 +167,7 @@ export function Home() {
               </p>
             )}
 
-            <p className="text-base text-gray-500 text-center">
+            <p className="text-lg text-gray-500 text-center">
               Como deseja consultar a bula?
             </p>
 
@@ -176,10 +178,10 @@ export function Home() {
                 <button
                   onClick={handleCameraClick}
                   disabled={isProcessing}
-                  className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-xl flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 transition-transform"
+                  className="w-26 h-26 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-xl flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 transition-transform"
                   aria-label="Fotografar embalagem do medicamento"
                 >
-                  <Camera size={36} />
+                  <Camera size={40} />
                 </button>
                 <span className="text-sm text-gray-600">Câmera</span>
               </div>
@@ -189,10 +191,10 @@ export function Home() {
                 <button
                   onClick={handleMicClick}
                   disabled={isProcessing}
-                  className="w-24 h-24 rounded-full bg-gradient-to-br from-green-500 to-green-600 text-white shadow-xl flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 transition-transform"
+                  className="w-28 h-28 rounded-full bg-gradient-to-br from-green-500 to-green-600 text-white shadow-xl flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 transition-transform"
                   aria-label="Fazer pergunta por voz"
                 >
-                  <Mic size={36} />
+                  <Mic size={40} />
                 </button>
                 <span className="text-sm text-gray-600">Voz</span>
               </div>

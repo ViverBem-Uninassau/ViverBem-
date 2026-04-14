@@ -2,29 +2,28 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { Camera, Mic, Loader2 } from "lucide-react";
 import { scanMedication, sendChat } from "../services/api";
-import logo from "../../assets/logo.jpg";
+import logo from "../../assets/logo_viver_bem.png";
 
 // ---------------------------------------------------------------------------
-// Utilitário de voz (TTS)
+// TTS
 // ---------------------------------------------------------------------------
 function speak(text: string) {
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = "pt-BR";
-  utterance.rate = 0.85;
-  utterance.pitch = 1;
-  utterance.volume = 1;
+  utterance.rate = 0.9;
   window.speechSynthesis.speak(utterance);
 }
 
 export function Home() {
   const navigate = useNavigate();
   const cameraInputRef = useRef<HTMLInputElement>(null);
+
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
 
   // -------------------------------------------------------------------------
-  // CÂMERA — captura foto e envia para o backend identificar o medicamento
+  // CÂMERA
   // -------------------------------------------------------------------------
   const handleCameraClick = () => {
     if (isProcessing) return;
@@ -40,22 +39,20 @@ export function Home() {
 
     try {
       const result = await scanMedication(file);
-
-      // Navega para o detalhe passando os dados via state (sem nova requisição)
       navigate(`/bulas/${result.id}`, { state: { medication: result } });
     } catch {
-      const msg = "Não foi possível identificar o medicamento. Tente tirar a foto com mais luz.";
+      const msg =
+        "Não foi possível identificar o medicamento. Tente novamente com mais luz.";
       setStatusMessage(msg);
       speak(msg);
     } finally {
       setIsProcessing(false);
-      // Limpa o input para que a mesma foto possa ser reenviada se necessário
       e.target.value = "";
     }
   };
 
   // -------------------------------------------------------------------------
-  // MICROFONE — captura voz via Web Speech API e envia para a IA responder
+  // MICROFONE
   // -------------------------------------------------------------------------
   const handleMicClick = () => {
     if (isProcessing) return;
@@ -65,14 +62,12 @@ export function Home() {
       (window as any).webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-      speak("Seu navegador não suporta reconhecimento de voz. Tente pelo Chrome.");
+      speak("Seu navegador não suporta reconhecimento de voz.");
       return;
     }
 
     const recognition = new SpeechRecognition();
     recognition.lang = "pt-BR";
-    recognition.continuous = false;
-    recognition.interimResults = false;
 
     let gotResult = false;
 
@@ -83,7 +78,7 @@ export function Home() {
 
     recognition.onresult = async (event: any) => {
       gotResult = true;
-      const transcript: string = event.results[0][0].transcript;
+      const transcript = event.results[0][0].transcript;
       setStatusMessage(`Você disse: "${transcript}"`);
 
       try {
@@ -91,7 +86,7 @@ export function Home() {
         setStatusMessage(result.response);
         speak(result.response);
       } catch {
-        const msg = "Não consegui processar sua pergunta. Tente novamente.";
+        const msg = "Não consegui entender. Tente novamente.";
         setStatusMessage(msg);
         speak(msg);
       } finally {
@@ -101,17 +96,10 @@ export function Home() {
 
     recognition.onerror = () => {
       if (!gotResult) {
-        const msg = "Não consegui ouvir. Segure o botão e fale novamente.";
+        const msg = "Não consegui ouvir. Tente novamente.";
         setStatusMessage(msg);
         speak(msg);
         setIsProcessing(false);
-      }
-    };
-
-    recognition.onend = () => {
-      if (!gotResult) {
-        setIsProcessing(false);
-        setStatusMessage("");
       }
     };
 
@@ -119,11 +107,12 @@ export function Home() {
   };
 
   // -------------------------------------------------------------------------
-  // Render
+  // UI
   // -------------------------------------------------------------------------
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
-      {/* Input de câmera oculto — abre câmera traseira em dispositivos móveis */}
+    <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
+
+      {/* INPUT CAMERA */}
       <input
         ref={cameraInputRef}
         type="file"
@@ -133,28 +122,49 @@ export function Home() {
         onChange={handleImageCapture}
       />
 
-      {/* TOPO (40%) */}
-      <div className="h-[40%] bg-gradient-to-br from-blue-400 via-blue-300 to-blue-200 flex flex-col items-center justify-center gap-4 px-6">
-        <div className="w-28 h-28 bg-blue-200/40 rounded-3xl flex items-center justify-center backdrop-blur-sm">
-           <img 
-                src={logo}
-                alt="Logo ViverBem"
-                className="w-24 h-24 object-cover rounded-full border-4 border-white shadow-lg"
-      />
+      {/* ================= TOPO ================= */}
+      <div className="h-[42%] relative bg-gradient-to-br from-blue-600 via-blue-300 to-blue-100 flex flex-col items-center justify-center gap-6 px-6 overflow-hidden">
+
+        {/* luz suave */}
+        <div className="absolute w-72 h-72 bg-white/20 rounded-full blur-3xl top-[-60px] right-[-60px]" />
+
+        {/* halo leve (sem cor azul agora) */}
+        <div className="absolute w-60 h-60 bg-white/20 rounded-full blur-2xl" />
+
+        {/* LOGO */}
+        <div className="w-44 h-44 flex items-center justify-center z-10">
+          <img
+            src={logo}
+            alt="Logo ViverBem"
+            
+            className="max-w-full max-h-full object-contain 
+            drop-shadow-[0_6px_12px_rgba(0,0,0,0.3)]
+            contrast-110 brightness-95"
+          />
         </div>
 
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-white">ViverBem</h1>
-          <p className="text-sm text-white/90">Seu assistente de medicamentos</p>
-        </div>
+        {/* TEXTO */}
+       <div className="text-center flex flex-col items-center gap-1">
+
+  {/* NOME DA MARCA */}
+  <h1 className="text-3xl font-extrabold tracking-wide text-white drop-shadow-sm">
+    ViverBem
+  </h1>
+
+  {/* SLOGAN */}
+  <p className="text-lg text-white/80">
+    Seu assistente de medicamentos
+  </p>
+
+</div>
       </div>
 
-      {/* PARTE DE BAIXO */}
-      <div className="h-1/2 flex flex-col items-center justify-center gap-6 px-6 bg-white">
+      {/* ================= CONTEÚDO ================= */}
+      <div className="flex-1 flex flex-col items-center justify-center gap-8 px-6 bg-white rounded-t-3xl -mt-6 shadow-lg">
+
         {isProcessing ? (
-          /* Estado de processamento */
           <div className="flex flex-col items-center gap-4">
-            <Loader2 size={48} className="text-blue-500 animate-spin" />
+            <Loader2 size={48} className="text-blue-500 animate-spin drop-shadow-md" />
             <p className="text-base text-gray-600 text-center font-medium">
               {statusMessage || "Processando..."}
             </p>
@@ -162,42 +172,48 @@ export function Home() {
         ) : (
           <>
             {statusMessage && (
-              <p className="text-sm text-gray-600 text-center px-4 leading-relaxed">
+              <p className="text-sm text-gray-500 text-center px-4 leading-relaxed">
                 {statusMessage}
               </p>
             )}
 
-            <p className="text-lg text-gray-500 text-center">
-              Como deseja consultar a bula?
+            <p className="text-lg text-gray-600 text-center font-medium">
+              Como você quer buscar seu medicamento?
             </p>
 
             {/* BOTÕES */}
-            <div className="flex items-center justify-center gap-10">
-              {/* Câmera */}
+            <div className="flex items-center justify-center gap-12">
+
+              {/* CAMERA */}
               <div className="flex flex-col items-center gap-2">
                 <button
                   onClick={handleCameraClick}
                   disabled={isProcessing}
-                  className="w-26 h-26 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-xl flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 transition-transform"
-                  aria-label="Fotografar embalagem do medicamento"
+                  className="w-28 h-28 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-xl flex items-center justify-center
+                  hover:scale-110 hover:shadow-2xl
+                  active:scale-95
+                  transition-all duration-200 disabled:opacity-50"
                 >
                   <Camera size={40} />
                 </button>
                 <span className="text-sm text-gray-600">Câmera</span>
               </div>
 
-              {/* Microfone */}
+              {/* MICROFONE */}
               <div className="flex flex-col items-center gap-2">
                 <button
                   onClick={handleMicClick}
                   disabled={isProcessing}
-                  className="w-28 h-28 rounded-full bg-gradient-to-br from-green-500 to-green-600 text-white shadow-xl flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 transition-transform"
-                  aria-label="Fazer pergunta por voz"
+                  className="w-28 h-28 rounded-full bg-gradient-to-br from-green-500 to-green-600 text-white shadow-xl flex items-center justify-center
+                  hover:scale-110 hover:shadow-2xl
+                  active:scale-95
+                  transition-all duration-200 disabled:opacity-50"
                 >
                   <Mic size={40} />
                 </button>
                 <span className="text-sm text-gray-600">Voz</span>
               </div>
+
             </div>
           </>
         )}

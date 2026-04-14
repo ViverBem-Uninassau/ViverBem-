@@ -105,12 +105,12 @@ export function DetalheAlarme() {
               <p className="text-2xl font-semibold text-gray-800">{alarme.medication}</p>
             </div>
 
-            {alarme.dosage && (
-              <div>
-                <p className="text-sm font-medium text-gray-500 mb-2">Dosagem</p>
-                <p className="text-lg text-gray-700">{alarme.dosage}</p>
-              </div>
-            )}
+            <div>
+                  <p className="text-sm font-medium text-gray-500 mb-2">Dosagem</p>
+                  <p className="text-lg text-gray-700">
+                    {alarme.dosage || "Não informada"}
+                  </p>
+            </div>
 
             <div>
               <p className="text-sm font-medium text-gray-500 mb-2">Frequência</p>

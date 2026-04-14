@@ -33,42 +33,11 @@ O planejamento e acompanhamento das tarefas foram gerenciados no **Trello**, uti
 - **Responsáveis definidos** — cada card foi atribuído a um ou mais membros da equipe.
 - **Datas de entrega** — prazos configurados por card para alinhamento com as entregas acadêmicas.
 
-## 🛠️ Stack Tecnológica
-
-| Categoria    | Tecnologia        | Justificativa                                                      |
-|--------------|-------------------|--------------------------------------------------------------------|
-| Frontend     | React + TypeScript | Performance nativa e tipagem segura para projetos acadêmicos.     |
-| Build Tool   | Vite              | Agilidade no desenvolvimento e hot reload otimizado.              |
-| Estilização  | Tailwind CSS      | Agilidade na criação de interfaces responsivas e acessíveis.      |
-| IA           | Google Vision AI  | Precisão no reconhecimento de imagens e OCR.                      |
-| Design       | Figma             | Prototipagem colaborativa focada em acessibilidade.               |
-
----
-
-## 🚀 Como Executar
-
-**Requisitos:** Node.js instalado.
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/marlonporto/viver-bem.git
-   ```
-
-2. Instale as dependências:
-   ```bash
-   npm i
-   ```
-
-3. Inicie o ambiente de desenvolvimento:
-   ```bash
-   npm run dev
-   ```
-
 ---
 
 ## 🏗️ Regras de Negócio e Arquitetura
 
-O sistema opera sob o **fluxo de confiança da IA**:
+O sistema operará sob o **fluxo de confiança da IA**:
 
 - **Validação (RN05):** O resultado do escaneamento só é aceito se o grau de confiança da IA for ≥ 80%.
 - **Segurança (RN01):** Toda informação exibida contém um disclaimer informando que o app não substitui orientação médica.

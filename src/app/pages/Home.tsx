@@ -123,10 +123,10 @@ export function Home() {
       />
 
       {/* ================= TOPO ================= */}
-      <div className="h-[42%] relative bg-gradient-to-br from-blue-600 via-blue-300 to-blue-100 flex flex-col items-center justify-center gap-6 px-6 overflow-hidden">
+      <div className="h-[50%] relative bg-gradient-to-br from-blue-600 via-blue-300 to-blue-200 flex flex-col items-center justify-center gap-4 px-6">
 
         {/* luz suave */}
-        <div className="absolute w-72 h-72 bg-white/20 rounded-full blur-3xl top-[-60px] right-[-60px]" />
+        <div className="absolute w-70 h-70 bg-white/20 rounded-full blur-3xl top-[-60px] right-[-60px]" />
 
         {/* halo leve (sem cor azul agora) */}
         <div className="absolute w-60 h-60 bg-white/20 rounded-full blur-2xl" />
@@ -147,7 +147,7 @@ export function Home() {
        <div className="text-center flex flex-col items-center gap-1">
 
   {/* NOME DA MARCA */}
-  <h1 className="text-3xl font-extrabold tracking-wide text-white drop-shadow-sm">
+  <h1 className="text-3xl font-bold text-white">
     ViverBem
   </h1>
 
@@ -177,7 +177,7 @@ export function Home() {
               </p>
             )}
 
-            <p className="text-lg text-gray-600 text-center font-medium">
+            <p className="text-base text-gray-500 text-center">
               Como você quer buscar seu medicamento?
             </p>
 

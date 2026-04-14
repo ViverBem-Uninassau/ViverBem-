@@ -164,8 +164,8 @@ export function NovoAlarme() {
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl bg-white text-left 
                     hover:border-blue-400 hover:shadow-sm transition flex items-center justify-between"
                   >
-                    <span>{unidade}</span>
-                    <span className={`transition ${openDropdown ? "rotate-180" : ""}`}>
+                    <span className="font-normal">{unidade}</span>
+                    <span className={`text-gray-300 transition ${openDropdown ? "rotate-180" : ""}`}>
                       ▼
                     </span>
                   </button>
@@ -181,7 +181,7 @@ export function NovoAlarme() {
                           }}
                           className={`w-full px-4 py-3 text-left text-sm transition
                           hover:bg-blue-50 hover:text-blue-600
-                          ${unidade === item ? "bg-blue-100 text-blue-600 font-medium" : "text-gray-600"}`}
+                          ${unidade === item ? "bg-blue-100 text-blue-600 font-normal" : "text-gray-500"}`}
                         >
                           {item}
                         </button>

@@ -83,8 +83,13 @@ export function Home() {
 
       try {
         const result = await sendChat(transcript);
-        setStatusMessage(result.response);
-        speak(result.response);
+        // Navega para tela dedicada (mesmo padrão da foto/bula)
+        navigate("/chat/resultado", {
+          state: {
+            transcript,
+            response: result.response,
+          },
+        });
       } catch {
         const msg = "Não consegui entender. Tente novamente.";
         setStatusMessage(msg);
@@ -136,7 +141,7 @@ export function Home() {
           <img
             src={logo}
             alt="Logo ViverBem"
-            
+
             className="max-w-full max-h-full object-contain 
             drop-shadow-[0_6px_12px_rgba(0,0,0,0.3)]
             contrast-110 brightness-95"
@@ -144,19 +149,19 @@ export function Home() {
         </div>
 
         {/* TEXTO */}
-       <div className="text-center flex flex-col items-center gap-1">
+        <div className="text-center flex flex-col items-center gap-1">
 
-  {/* NOME DA MARCA */}
-  <h1 className="text-3xl font-bold text-white">
-    ViverBem
-  </h1>
+          {/* NOME DA MARCA */}
+          <h1 className="text-3xl font-bold text-white">
+            ViverBem
+          </h1>
 
-  {/* SLOGAN */}
-  <p className="text-lg text-white/80">
-    Seu assistente de medicamentos
-  </p>
+          {/* SLOGAN */}
+          <p className="text-lg text-white/80">
+            Seu assistente de medicamentos
+          </p>
 
-</div>
+        </div>
       </div>
 
       {/* ================= CONTEÚDO ================= */}
